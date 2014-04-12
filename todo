@@ -1,10 +1,6 @@
 timetracker
 
-Idea:
-
-The project works on top of node.js, saving its data in mongodb. Client uses ajax-calls to server, which provides a rest api. Client is a single-page-application with some different views (add new items, edit tracked times, etc.).
-
-** Libraries/tools **
+** Needed libraries/tools **
 
 - node.js
 	- mongoose
@@ -13,9 +9,11 @@ The project works on top of node.js, saving its data in mongodb. Client uses aja
 - client
 	- backbone?
 	- ajax calls?
+	- style frameworks? Bootstrap?
 
 
 ** Roadmap **
+
 
 0.0.1. Build server that serves html (through apache/nginx?)
 
