@@ -12,11 +12,14 @@ var restify = require("restify");
 
 
 function respond(req, res, next) {
+
+	res.header("Access-Control-Allow-Origin", "*"); 
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
 	var responseText = JSON.stringify("Hello " + req.params.name);
 	res.send(responseText);
 	next();
 }
-
 
 var server = restify.createServer();
 server.get("/hello/:name", respond);
