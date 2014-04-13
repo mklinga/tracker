@@ -1,0 +1,8 @@
+{
+  "name": "Timetracker",
+  "version": "0.0.0",
+  "devDependencies": {
+    "mongoose": "^3.8.8",
+    "restify": "^2.7.0"
+  }
+}
