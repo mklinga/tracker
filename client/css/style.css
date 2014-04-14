@@ -7,3 +7,20 @@ body {
 main {
 	padding: 100px;
 }
+
+#timetable {
+	border-collapse: collapse;
+	text-align: left;
+}
+
+#timetable th {
+	background: #ccd;
+}
+
+#timetable th, #timetable td {
+	padding: 20px;
+}
+
+#timetable tbody > tr:hover {
+	background-color: #eef;
+}

@@ -3,10 +3,10 @@ $( document ).ready(function() {
 	$.get("http://localhost:8080/api/times", function( data ) {
 		var parsedData = JSON.parse(data);
 
-		$("main").html("<h2>Times so far</h2>");
+		$("#timetable").empty().html("<thead><tr><th>Times</th><th>Title</th></tr></thead>");
 
 		for (var time in parsedData) {
-			$("main").append(parsedData[time].history.length + "x " + parsedData[time].title + "<br/>");
+			$("#timetable").append("<tbody><tr><td>" + parsedData[time].history.length + "</td><td>" + parsedData[time].title + "</td></tr></tbody>");
 		}
 	});
 
