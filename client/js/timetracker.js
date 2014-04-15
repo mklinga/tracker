@@ -1,5 +1,6 @@
-function init_backbone() {
+$( document ).ready(function() {
 
+	/* Create our application */
 	window.App = {
 		Models: {},
 		Collections: {},
@@ -7,6 +8,7 @@ function init_backbone() {
 		Router: {}
 	};
 
+	/* Create router */
 	App.Router = Backbone.Router.extend({
 		routes: {
 			'': 'index',
@@ -35,13 +37,12 @@ function init_backbone() {
 		}
 	});
 
+	/* Initialize our router */
 	new App.Router();
+
+	/* Start logging history (needed by router) */
 	Backbone.history.start();
 
-}
-
-$( document ).ready(function() {
-
-	init_backbone();
+	/* All done! */
 	console.log("Document ready.");
 });
