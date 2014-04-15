@@ -1,14 +1,47 @@
-$( document ).ready(function() {
+function init_backbone() {
 
-	$.get("http://localhost:8080/api/times", function( data ) {
-		var parsedData = JSON.parse(data);
+	window.App = {
+		Models: {},
+		Collections: {},
+		Views: {},
+		Router: {}
+	};
 
-		$("#timetable").empty().html("<thead><tr><th>Times</th><th>Title</th></tr></thead>");
+	App.Router = Backbone.Router.extend({
+		routes: {
+			'': 'index',
+			'show': 'show',
+		},
+		index: function(){
+			$.get("http://localhost:8080/api/times", function( data ) {
+				var parsedData = JSON.parse(data);
 
-		for (var time in parsedData) {
-			$("#timetable").append("<tbody><tr><td>" + parsedData[time].history.length + "</td><td>" + parsedData[time].title + "</td></tr></tbody>");
+				$("#timetable").empty().html("<thead><tr><th>Times</th><th>Title</th></tr></thead><tbody>");
+
+				/* Listataan ajat taulukkoon */
+				for (var time in parsedData) {
+					$("#timetable").append("<tr>" +
+						"<td>" + parsedData[time].history.length + "</td>" +
+						"<td>" + parsedData[time].title + "</td>" + 
+						"</tr>");
+				}
+
+				$("#timetable").append("</tbody>");
+			});
+		},
+
+		show: function(){
+			$("main").html("SHOWTIME");
 		}
 	});
 
-	console.log("I'm right here!");
+	new App.Router();
+	Backbone.history.start();
+
+}
+
+$( document ).ready(function() {
+
+	init_backbone();
+	console.log("Document ready.");
 });
