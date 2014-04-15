@@ -8,6 +8,12 @@ main {
 	padding: 100px;
 }
 
+#commands {
+	border-top: 1px solid #ddd;
+	margin-top: 25px;
+	padding: 25px;
+}
+
 #timetable {
 	border-collapse: collapse;
 	text-align: left;
