@@ -7,7 +7,8 @@
  *
  */
 
-require("./db.js");
+var restify = require("restify");
+var db = require("./db.js");
 
 /* Mock data for "times" */
 var times = {
@@ -18,11 +19,7 @@ var times = {
 			"amount": 37.5,
 			"timeFrame": "week"
 		},
-		"history": [
-			{ 'begin': 1979700, 'end': 1979760},
-			{ 'begin': 1989700, 'end': 1989760},
-			{ 'begin': 1999700, 'end': 1999760},
-		]
+		"history": []
 	},
 	"2": {
 		"title": "Fun",
@@ -38,15 +35,22 @@ var times = {
 	}
 };
 
-var restify = require("restify");
-
 function getAllTimes(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	var authenticatedUser = 1;
 
-	var allTimes = JSON.stringify(times);
-	res.send(allTimes);
-	next();
+	if (authenticatedUser) {
+		db.getAllHistory(authenticatedUser, function(history) {
+			times[authenticatedUser].history = history;
+
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+			var allTimes = JSON.stringify(times);
+			res.send(allTimes);
+			next();
+		});
+
+	}
 }
 
 function respond(req, res, next) {

@@ -11,10 +11,10 @@ $( document ).ready(function() {
 	/* Create router */
 	App.Router = Backbone.Router.extend({
 		routes: {
-			'': 'index',
+			'times': 'times',
 			'show': 'show',
 		},
-		index: function(){
+		times: function(){
 			$.get("http://localhost:8080/api/times", function( data ) {
 				var parsedData = JSON.parse(data);
 

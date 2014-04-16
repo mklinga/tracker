@@ -39,9 +39,9 @@ var User, Time, History;
 mongoose.connect('mongodb://localhost/test');
 
 /* Database handle */
-var db = mongoose.connection;
+var mongoDB = mongoose.connection;
 
-db.once('open', function() {
+mongoDB.once('open', function() {
 	/* Our connection to database is now opened! */
 	historySchema.methods.findAllFromSameUser = function (cb) {
 		console.log(this.userId);
@@ -51,13 +51,9 @@ db.once('open', function() {
 	User = mongoose.model('User', userSchema);
 	Time = mongoose.model('Time', timeSchema);
 	History = mongoose.model('History', historySchema);
-
-	getAllHistory(1, function(history) {
-		console.log(history);
-	});
 });
 
-db.on('error', console.error.bind(console, "connection error"));
+mongoDB.on('error', console.error.bind(console, "connection error"));
 
 /*
  *
@@ -65,13 +61,14 @@ db.on('error', console.error.bind(console, "connection error"));
  *
  */
 
-function getAllHistory(userId, cb) {
+var getAllHistory = exports.getAllHistory = function(userId, cb) {
 	History.find({ userId: userId }, function(err, histories) {
 		if (err) return console.error(err);
 		cb(histories);
 	});
 
-}
+};
+
 function addNewHistory(historyItem) {
 	var history = new History({
 		userId: historyItem.userId,
