@@ -7,6 +7,8 @@
  *
  */
 
+require("./db.js");
+
 /* Mock data for "times" */
 var times = {
 	"1": {
