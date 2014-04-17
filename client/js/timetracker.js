@@ -15,7 +15,7 @@ $( document ).ready(function() {
 			'show': 'show',
 		},
 		times: function(){
-			$.get("http://localhost:8080/api/times", function( data ) {
+			$.get("https://localhost/tt/api/times", function( data ) {
 				var parsedData = JSON.parse(data);
 
 				$("#timetable").empty().html("<thead><tr><th>Times</th><th>Title</th></tr></thead><tbody>");
