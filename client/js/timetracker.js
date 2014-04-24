@@ -8,13 +8,47 @@ $( document ).ready(function() {
 		Router: {}
 	};
 
-	/* Create router */
+	/*
+	 *
+	 * Models
+	 *
+	 */
+	
+	/* History item */
+	App.Models.History = Backbone.Model.extend({
+		defaults: {
+			userId: 0,
+			timerId: 0,
+			begin: 0,
+			end: 0
+		},
+	});
+
+	/* User */
+	App.Models.User = Backbone.Model.extend({
+		defaults: {
+			id: 0,
+			name: "John"
+		}
+	});
+
+	/* 
+	 *
+	 * Router
+	 *
+	 */
+
 	App.Router = Backbone.Router.extend({
 		routes: {
+			'': 'dashboard',
 			'times': 'times',
-			'show': 'show',
+			'settings': 'settings',
 		},
-		times: function(){
+		dashboard: function() {
+			var a = new App.Models.History();
+			a.print();
+		},
+		times: function() {
 			$.get("https://localhost/tt/api/times", function( data ) {
 				var parsedData = JSON.parse(data);
 
@@ -32,8 +66,8 @@ $( document ).ready(function() {
 			});
 		},
 
-		show: function(){
-			$("main").html("SHOWTIME");
+		settings: function() {
+			// $("main").html("Set things");
 		}
 	});
 
