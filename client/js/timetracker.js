@@ -29,6 +29,13 @@ $( document ).ready(function() {
 		defaults: {
 			id: 0,
 			name: "John"
+		},
+		validate: function(attributes) {
+			if (!attributes.name)
+				return "User must have a name!";
+
+			if (attributes.id < 0)
+				return "Id cannot be negative!";
 		}
 	});
 
@@ -45,8 +52,7 @@ $( document ).ready(function() {
 			'settings': 'settings',
 		},
 		dashboard: function() {
-			var a = new App.Models.History();
-			a.print();
+			/* index */
 		},
 		times: function() {
 			$.get("https://localhost/tt/api/times", function( data ) {
