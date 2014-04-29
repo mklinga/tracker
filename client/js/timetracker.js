@@ -18,9 +18,9 @@ $( document ).ready(function() {
 	App.Models.History = Backbone.Model.extend({
 		defaults: {
 			userId: 0,
-			timerId: 0,
-			begin: 0,
-			end: 0
+			timerId: 9,
+			begin: 1,
+			end: 2
 		},
 	});
 
@@ -36,6 +36,26 @@ $( document ).ready(function() {
 
 			if (attributes.id < 0)
 				return "Id cannot be negative!";
+		}
+	});
+
+	/*
+	 *
+	 * Views
+	 *
+	 */
+	
+	App.Views.Times = Backbone.View.extend({
+		tagName: 'li',
+	
+		template: _.template( $("#testTemplate").html()),
+
+		initialize: function() {
+			this.render();
+		},
+
+		render: function() {
+			this.$el.html( this.template(this.model.toJSON()));
 		}
 	});
 
