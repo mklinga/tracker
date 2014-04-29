@@ -48,7 +48,7 @@ $( document ).ready(function() {
 	App.Views.Times = Backbone.View.extend({
 		tagName: 'li',
 	
-		template: _.template( $("#testTemplate").html()),
+		template: JST["client/templates/times.html"],
 
 		initialize: function() {
 			this.render();
@@ -58,7 +58,7 @@ $( document ).ready(function() {
 			this.$el.html( this.template(this.model.toJSON()));
 		}
 	});
-
+	
 	/* 
 	 *
 	 * Router
