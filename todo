@@ -14,10 +14,11 @@ timetracker
 - security:
 	- OAuth!
 
-** Roadmap **
+
+TODO:
+
+separate timetracker.js (and else) to multiple files views/models/etc. history/user/etc.
+	- perhaps requirejs, see http://backbonetutorials.com/organizing-backbone-using-modules/
 
 
-0.0.1. Build REST server and client, make them communicate with each other
-
-0.0.2. Learn to use mongodb for saving/querying data from server
 
