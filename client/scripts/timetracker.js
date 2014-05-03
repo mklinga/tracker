@@ -78,59 +78,6 @@ $( document ).ready(function() {
 		}
 	});
 	
-	/* 
-	 *
-	 * Router
-	 *
-	 */
-
-	App.Router = Backbone.Router.extend({
-		routes: {
-			'': 'dashboard',
-			'times': 'times',
-			'settings': 'settings',
-		},
-		dashboard: function() {
-			/* index */
-		},
-		times: function() {
-			$("#timetable").empty().html("<h2>Times</h2>");
-
-			$.get("https://localhost/tt/api/times", function( data ) {
-				/* TODO: validate recieved data */
-				var parsedData = JSON.parse(data);
-
-				/* TODO: don't save to window. */
-				window.historyCollection = new App.Collections.HistoryCollection();
-
-				for (var index in parsedData) {
-					for (var hist in parsedData[index].history) {
-						var historyItem = new App.Models.History({
-							begin: parsedData[index].history[hist].begin,
-							end: parsedData[index].history[hist].end
-						});
-
-						window.historyCollection.add(historyItem);
-					}
-				}
-				
-				/* render times in the screen */
-				var hlv = new App.Views.HistoryListView({collection: window.historyCollection});
-				$('#timetable').append(hlv.render().el);
-
-			});
-		},
-
-		settings: function() {
-			// $("main").html("Set things");
-		}
-	});
-
-	/* Initialize our router */
-	new App.Router();
-
-	/* Start logging history (needed by router) */
-	Backbone.history.start();
 
 	/* All done! */
 	console.log("Document ready.");
