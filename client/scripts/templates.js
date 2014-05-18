@@ -1,3 +1,5 @@
+define(function(){
+
 this["JST"] = this["JST"] || {};
 
 this["JST"]["client/templates/times.html"] = function(obj) {
@@ -17,3 +19,7 @@ __p += 'Time for userid: <strong>' +
 }
 return __p
 };
+
+  return this["JST"];
+
+});

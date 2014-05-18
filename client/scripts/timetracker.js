@@ -14,16 +14,6 @@ $( document ).ready(function() {
 	 *
 	 */
 	
-	/* History item */
-	App.Models.History = Backbone.Model.extend({
-		defaults: {
-			userId: 0,
-			timerId: 9,
-			begin: 1,
-			end: 2
-		},
-	});
-
 	/* User */
 	App.Models.User = Backbone.Model.extend({
 		defaults: {
@@ -45,38 +35,12 @@ $( document ).ready(function() {
 	 *
 	 */
 	
-	App.Collections.HistoryCollection = Backbone.Collection.extend({
-		model: App.Models.History
-	});
-
 	/*
 	 *
 	 * Views
 	 *
 	 */
 	
-	App.Views.HistoryItemView = Backbone.View.extend({
-		tagName: 'li',
-	
-		template: JST["client/templates/times.html"],
-
-		render: function() {
-			this.$el.html( this.template(this.model.toJSON()));
-			return this;
-		}
-	});
-	
-	App.Views.HistoryListView = Backbone.View.extend({
-		tagName: 'ul',
-	
-		render: function() {
-			this.collection.each(function(history) {
-				var historyView = new App.Views.HistoryItemView({ model: history });
-				this.$el.append(historyView.render().el);
-			}, this);
-			return this;
-		}
-	});
 	
 
 	/* All done! */
