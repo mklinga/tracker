@@ -23,15 +23,11 @@ module.exports = function(grunt) {
 
 		jst: {
 			compile: {
-                /*
-				 * options: {
-				 * 	templateSettings: {
-				 * 		interpolate : /\{\{(.+?)\}\}/g
-				 * 	}
-				 * },
-                 */
+				options: {
+					amd: true
+				},
 				files: {
-					"client/js/templates.js": ["client/templates/**/*.html"]
+					"client/scripts/templates.js": ["client/templates/**/*.html"]
 				}
 			}
 		}
