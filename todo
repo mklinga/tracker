@@ -22,3 +22,10 @@ separate timetracker.js (and else) to multiple files views/models/etc. history/u
 
 
 
+Real world applications:
+
+Harvest (http://www.getharvest.com/)
+Paymo (http://www.paymo.biz/)
+Toggl (https://www.toggl.com/)
+Freckle (http://letsfreckle.com/)
+RescueTime (https://www.rescuetime.com/)
