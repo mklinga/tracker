@@ -18,6 +18,10 @@ module.exports = function(grunt) {
 			css: {
 				files: 'scss/*.scss',
 				tasks: ['sass'],
+			},
+			jst: {
+				files: 'client/templates/**/*.html',
+				tasks: ['jst']
 			}
 		},
 
