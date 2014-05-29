@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-timetracker
+tracker
 ========
 
 This will be a small application to track used time on different tasks. 
