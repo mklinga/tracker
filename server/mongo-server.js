@@ -10,7 +10,7 @@
 var restify = require("restify");
 var db = require("./db.js");
 
-/* Mock data for "times" */
+/* Mock data */
 var times = {
 	"1": {
 		"title": "Work",
@@ -35,6 +35,25 @@ var times = {
 	}
 };
 
+function getAllProjects(req, res, next) {
+	// TODO: authentication
+	var authenticatedUser = 1;
+
+	if (authenticatedUser) {
+		db.getAllProjects(authenticatedUser, function(projects) {
+			//times[authenticatedUser].history = history;
+
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+			var allProjects = JSON.stringify(projects);
+			res.send(allProjects);
+			next();
+		});
+
+	}
+}
+
 function getAllTimes(req, res, next) {
 	var authenticatedUser = 1;
 
@@ -53,24 +72,10 @@ function getAllTimes(req, res, next) {
 	}
 }
 
-function respond(req, res, next) {
-
-	res.header("Access-Control-Allow-Origin", "*"); 
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
-	var responseText = JSON.stringify("Hello " + req.params.name);
-	res.send(responseText);
-	next();
-}
-
 var server = restify.createServer();
 server.get("/api/times", getAllTimes);
+server.get("/api/projects", getAllProjects);
 //server.head("/hello/:name", respond);
-
-server.post("/hello", function create(req, res, next) {
-	res.send(201, Math.random().toString(36).substr(3, 8));
-	return next();
-});
 
 server.listen(8080, function () {
 	console.log("%s listening at %s", server.name, server.url);

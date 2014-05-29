@@ -19,6 +19,13 @@ var userSchema = mongoose.Schema({
 	name: String
 });
 
+var projectSchema = mongoose.Schema({
+	userId: Number,
+	id: Number,
+	name: String
+	// description etc.
+});
+
 var timeSchema = mongoose.Schema({
 	id: Number,
 	title: String,
@@ -33,7 +40,7 @@ var historySchema = mongoose.Schema({
 });
 
 /* mongoose Models */
-var User, Time, History;
+var User, Time, History, Project;
 
 /* Connect to mongo database */
 mongoose.connect('mongodb://localhost/test');
@@ -51,6 +58,8 @@ mongoDB.once('open', function() {
 	User = mongoose.model('User', userSchema);
 	Time = mongoose.model('Time', timeSchema);
 	History = mongoose.model('History', historySchema);
+	Project = mongoose.model('Project', projectSchema);
+
 });
 
 mongoDB.on('error', console.error.bind(console, "connection error"));
@@ -60,6 +69,14 @@ mongoDB.on('error', console.error.bind(console, "connection error"));
  * Handler functions
  *
  */
+
+var getAllProjects = exports.getAllProjects = function(id, cb) {
+	Project.find({ "userId": id }, function(err, projects) {
+		if (err) return console.error(err);
+		cb(projects);
+	});
+
+};
 
 var getAllHistory = exports.getAllHistory = function(userId, cb) {
 	History.find({ userId: userId }, function(err, histories) {
