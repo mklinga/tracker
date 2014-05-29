@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 timetracker
 ========
 
@@ -20,4 +21,3 @@ Goal
 	* Another sub-goal
 
 and so on.
-
