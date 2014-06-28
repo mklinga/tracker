@@ -8,9 +8,11 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += 'Project ' +
 ((__t = ( id )) == null ? '' : __t) +
-': <strong>' +
+': <a href="#times/' +
+((__t = ( id )) == null ? '' : __t) +
+'"><strong>' +
 ((__t = ( name )) == null ? '' : __t) +
-'</strong>\n';
+'</strong></a>\n';
 
 }
 return __p

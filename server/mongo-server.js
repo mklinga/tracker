@@ -10,6 +10,8 @@
 var restify = require("restify");
 var db = require("./db.js");
 
+var authenticatedUser = function() { return 1; };
+
 /* Mock data */
 var times = {
 	"1": {
@@ -36,11 +38,9 @@ var times = {
 };
 
 function getAllProjects(req, res, next) {
-	// TODO: authentication
-	var authenticatedUser = 1;
 
-	if (authenticatedUser) {
-		db.getAllProjects(authenticatedUser, function(projects) {
+	if (authenticatedUser()) {
+		db.getAllProjects(authenticatedUser(), function(projects) {
 			//times[authenticatedUser].history = history;
 
 			res.header("Access-Control-Allow-Origin", "*");
@@ -55,11 +55,10 @@ function getAllProjects(req, res, next) {
 }
 
 function getAllTimes(req, res, next) {
-	var authenticatedUser = 1;
 
-	if (authenticatedUser) {
-		db.getAllHistory(authenticatedUser, function(history) {
-			times[authenticatedUser].history = history;
+	if (authenticatedUser()) {
+		db.getAllHistory(authenticatedUser(), function(history) {
+			times[authenticatedUser()].history = history;
 
 			res.header("Access-Control-Allow-Origin", "*");
 			res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -72,8 +71,22 @@ function getAllTimes(req, res, next) {
 	}
 }
 
+function getTime(req, res, next) {
+	if (authenticatedUser()) {
+		db.getProjectHistory(authenticatedUser(), req.params.id,  function(history) {
+			res.header("Access-Control-Allow-Origin", "*");
+			res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+			var times = JSON.stringify(history);
+			res.send(times);
+			next();
+		});
+	}
+}
+
 var server = restify.createServer();
 server.get("/api/times", getAllTimes);
+server.get("/api/times/:id", getTime);
 server.get("/api/projects", getAllProjects);
 //server.head("/hello/:name", respond);
 

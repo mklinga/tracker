@@ -19,20 +19,18 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 
 			var that = this;
 
-			$.get("https://localhost/tt/api/times", function( data ) {
+			$.get("https://localhost/tt/api/times/" + that.id, function( data ) {
 				/* TODO: validate recieved data */
 				var parsedData = JSON.parse(data);
 				that.collection = new HistoryCollection();
 
 				for (var index in parsedData) {
-					for (var hist in parsedData[index].history) {
-						var historyItem = new HistoryModel({
-							begin: parsedData[index].history[hist].begin,
-							end: parsedData[index].history[hist].end
-						});
+					var historyItem = new HistoryModel({
+						begin: parsedData[index].begin,
+						end: parsedData[index].end
+					});
 
-						that.collection.add(historyItem);
-					}
+					that.collection.add(historyItem);
 				}
 
 				that.collection.each(function(history) {

@@ -35,6 +35,7 @@ var timeSchema = mongoose.Schema({
 var historySchema = mongoose.Schema({
 	userId: Number,
 	timerId: Number,
+	projectId: Number,
 	begin: Number,
 	end: Number
 });
@@ -75,7 +76,6 @@ var getAllProjects = exports.getAllProjects = function(id, cb) {
 		if (err) return console.error(err);
 		cb(projects);
 	});
-
 };
 
 var getAllHistory = exports.getAllHistory = function(userId, cb) {
@@ -83,13 +83,20 @@ var getAllHistory = exports.getAllHistory = function(userId, cb) {
 		if (err) return console.error(err);
 		cb(histories);
 	});
+};
 
+var getProjectHistory = exports.getProjectHistory = function(userId, projectId, cb) {
+	History.find({ userId: userId, projectId: projectId }, function(err, histories) {
+		if (err) return console.error(err);
+		cb(histories);
+	});
 };
 
 function addNewHistory(historyItem) {
 	var history = new History({
 		userId: historyItem.userId,
 		timerId: historyItem.timerId,
+		projectId: historyItem.projectId,
 		begin: historyItem.begin,
 		end: historyItem.end
 	});

@@ -5,8 +5,8 @@ function($, _, Backbone, HistoryListView, ProjectListView){
 	/* Application Router */
 	var AppRouter = Backbone.Router.extend({
 		routes: {
-			// '': 'dashboard',
-			'times': 'history',
+			'': 'project',
+			'times/:projectId': 'history',
 			'projects': 'project',
 			// 'settings': 'settings',
 		},
@@ -19,8 +19,8 @@ function($, _, Backbone, HistoryListView, ProjectListView){
 			$("#timetable").empty().html("<h2>Projects</h2>");
 			$('#timetable').append(projectListView.render().el);
 		},
-		history: function() {
-			var historyListView = new HistoryListView();
+		history: function(projectId) {
+			var historyListView = new HistoryListView({id: projectId});
 			$("#timetable").empty().html("<h2>Times like that</h2>");
 			$('#timetable').append(historyListView.render().el);
 		},
