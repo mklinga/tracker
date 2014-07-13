@@ -6,7 +6,7 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 		
 		className: 'history-list-item',
 	
-		template: JST["client/templates/times.html"],
+		template: JST["client/templates/time_item.html"],
 
 		render: function() {
 			this.$el.html( this.template(this.model.toJSON()));
@@ -31,7 +31,7 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 		},
 
 		saveNewTime: function() {
-			this.$el.html("<span>Saved!</span>");
+			this.$el.html("<span>Saved (not really)!</span>");
 			console.log("tr");
 		}
 	});

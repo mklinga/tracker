@@ -6,7 +6,7 @@ this["JST"]["client/templates/history.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h1>Historylist</h1>\n<ul id="historylist"></ul>\n<a id="addNewTimeLink" href="#/times/' +
+__p += '<h1>Historylist</h1>\n<ul id="historylist"></ul>\n<a id="addNewTimeLink" href="#/history/' +
 ((__t = (project_id)) == null ? '' : __t) +
 '" alt="Add new item">Add new time</a>\n';
 
@@ -19,18 +19,18 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += 'Project ' +
-((__t = ( id )) == null ? '' : __t) +
-': <a href="#times/' +
-((__t = ( id )) == null ? '' : __t) +
+((__t = (id)) == null ? '' : __t) +
+': <a href="#history/' +
+((__t = (id)) == null ? '' : __t) +
 '"><strong>' +
-((__t = ( name )) == null ? '' : __t) +
+((__t = (name)) == null ? '' : __t) +
 '</strong></a>\n';
 
 }
 return __p
 };
 
-this["JST"]["client/templates/times.html"] = function(obj) {
+this["JST"]["client/templates/time_item.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {

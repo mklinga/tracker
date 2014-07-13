@@ -1,13 +1,12 @@
-define([ 'jquery', 'underscore', 'backbone', 'views/times', 'views/projects' ],
+define([ 'jquery', 'underscore', 'backbone', 'controllers/history', 'views/projects' ],
 
-function($, _, Backbone, HistoryListView, ProjectListView){
+function($, _, Backbone, HistoryListController, ProjectListView){
 
 	/* Application Router */
 	var AppRouter = Backbone.Router.extend({
 		routes: {
 			'': 'project',
-			'times/:projectId': 'history',
-			'times/:projectId/new': 'history_new',
+			'history/:projectId': 'history',
 			'projects': 'project',
 			// 'settings': 'settings',
 		},
@@ -20,12 +19,7 @@ function($, _, Backbone, HistoryListView, ProjectListView){
 			$("main").append(projectListView.render().el);
 		},
 		history: function(projectId) {
-			var historyListView = new HistoryListView({id: projectId});
-			$("main").html(historyListView.render().el);
-		},
-		history_new: function(projectId) {
-			// var historyListView = new HistoryListView({id: projectId});
-			// $("#timetable").html(historyListView.render().el);
+			var historyListController = new HistoryListController(projectId);
 		},
 
 		settings: function() {
