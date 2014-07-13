@@ -14,15 +14,13 @@ function($, _, Backbone, HistoryListView, ProjectListView){
 			/* index */
 		},
 		project: function() {
-			console.log("projects");
 			var projectListView = new ProjectListView();
 			$("#timetable").empty().html("<h2>Projects</h2>");
 			$('#timetable').append(projectListView.render().el);
 		},
 		history: function(projectId) {
 			var historyListView = new HistoryListView({id: projectId});
-			$("#timetable").empty().html("<h2>Times like that</h2>");
-			$('#timetable').append(historyListView.render().el);
+			$("#timetable").empty().append(historyListView.render().el);
 		},
 
 		settings: function() {

@@ -13,12 +13,14 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 	});
 	
 	var HistoryListView = Backbone.View.extend({
-		tagName: 'ul',
-	
+		tagName: 'div',
+		template: JST["client/templates/history.html"],
+
 		render: function() {
 
 			var that = this;
 
+			this.$el.html( this.template());
 			$.get("https://localhost/tt/api/times/" + that.id, function( data ) {
 				/* TODO: validate recieved data */
 				var parsedData = JSON.parse(data);
@@ -35,9 +37,10 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 
 				that.collection.each(function(history) {
 					var historyView = new HistoryItemView({ model: history });
-					that.$el.append(historyView.render().el);
+					that.$el.children("ul").append(historyView.$el);
+					historyView.render();
 				}, that);
-
+				
 			});
 
 			return this;

@@ -2,6 +2,16 @@ define(function(){
 
 this["JST"] = this["JST"] || {};
 
+this["JST"]["client/templates/history.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h1>Historylist</h1><ul></ul>\n';
+
+}
+return __p
+};
+
 this["JST"]["client/templates/projects.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -23,13 +33,13 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += 'Time ' +
-((__t = ( timerId )) == null ? '' : __t) +
+((__t = (timerId)) == null ? '' : __t) +
 ': <strong>' +
-((__t = ( userId )) == null ? '' : __t) +
+((__t = (userId)) == null ? '' : __t) +
 '</strong> - ' +
-((__t = ( begin )) == null ? '' : __t) +
+((__t = (begin)) == null ? '' : __t) +
 ' - ' +
-((__t = ( end )) == null ? '' : __t) +
+((__t = (end)) == null ? '' : __t) +
 '\n';
 
 }
