@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 		jst: {
 			compile: {
 				options: {
-					amd: true
+					amd: true,
 				},
 				files: {
 					"client/scripts/templates.js": ["client/templates/**/*.html"]

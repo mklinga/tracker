@@ -1,3 +1,7 @@
 <h1>Historylist</h1>
-<ul id="historylist"></ul>
-<a id="addNewTimeLink" href="#/history/${project_id}" alt="Add new item">Add new time</a>
+<ul id="historylist">
+	<% _.each(items, function(item) { %>
+		<li><%= item.timerId %>. <%= item.begin %> - <%= item.end %></li>
+	<% }) %>
+</ul>
+<a id="addNewTimeLink" href="#/history/<%= project_id %>" alt="Add new item">Add new time</a>

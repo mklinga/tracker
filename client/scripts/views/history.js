@@ -2,23 +2,6 @@ define(['jquery', 'underscore', 'backbone', 'collections/history', 'models/histo
 function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 
 	/*
-	 * Single time-item on history list
-	 */
-
-	var HistoryItemView = Backbone.View.extend({
-		tagName: 'li',
-		
-		className: 'history-list-item',
-	
-		template: JST["client/templates/time_item.html"],
-
-		render: function() {
-			this.$el.html( this.template(this.model.toJSON()));
-			return this;
-		}
-	});
-
-	/*
 	 * Form to add new items
 	 */
 
@@ -59,13 +42,7 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 
 			var that = this;
 
-			this.$el.html( this.template({project_id: this.id}));
-
-			this.collection.each(function(history) {
-				var historyView = new HistoryItemView({ model: history, id: 'timer-id-' + history.get("timerId") });
-				that.$el.children("ul").append(historyView.$el);
-				historyView.render();
-			}, that);
+			this.$el.html( this.template({items: this.collection.toJSON(), project_id: this.id}));
 
 			this.$('#addNewTimeLink').click(function(e) {
 				that.trigger("showSaveForm");
