@@ -6,7 +6,9 @@ this["JST"]["client/templates/history.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h1>Historylist</h1>\n<ul id="historylist"></ul>\n';
+__p += '<h1>Historylist</h1>\n<ul id="historylist"></ul>\n<a id="addNewTimeLink" href="#/times/' +
+((__t = (project_id)) == null ? '' : __t) +
+'" alt="Add new item">Add new time</a>\n';
 
 }
 return __p
@@ -41,6 +43,16 @@ __p += 'Time ' +
 ' - ' +
 ((__t = (end)) == null ? '' : __t) +
 '\n';
+
+}
+return __p
+};
+
+this["JST"]["client/templates/times_new.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<input type="date" id="startTime" /><button id="saveNewTime" name="save">Save!</button>\n';
 
 }
 return __p
