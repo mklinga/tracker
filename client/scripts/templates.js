@@ -6,7 +6,7 @@ this["JST"]["client/templates/history.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h1>Historylist</h1><ul></ul>\n';
+__p += '<h1>Historylist</h1>\n<ul id="historylist"></ul>\n';
 
 }
 return __p

@@ -3,6 +3,8 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 
 	var HistoryItemView = Backbone.View.extend({
 		tagName: 'li',
+		
+		className: 'history-list-item',
 	
 		template: JST["client/templates/times.html"],
 
@@ -29,14 +31,16 @@ function($, _, Backbone, HistoryCollection, HistoryModel, JST) {
 				for (var index in parsedData) {
 					var historyItem = new HistoryModel({
 						begin: parsedData[index].begin,
-						end: parsedData[index].end
+						end: parsedData[index].end,
+						timerId: parsedData[index].timerId,
+						userId: parsedData[index].userId
 					});
 
 					that.collection.add(historyItem);
 				}
 
 				that.collection.each(function(history) {
-					var historyView = new HistoryItemView({ model: history });
+					var historyView = new HistoryItemView({ model: history, id: 'timer-id-' + history.get("timerId") });
 					that.$el.children("ul").append(historyView.$el);
 					historyView.render();
 				}, that);

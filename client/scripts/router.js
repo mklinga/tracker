@@ -20,7 +20,7 @@ function($, _, Backbone, HistoryListView, ProjectListView){
 		},
 		history: function(projectId) {
 			var historyListView = new HistoryListView({id: projectId});
-			$("#timetable").empty().append(historyListView.render().el);
+			$("#timetable").html(historyListView.render().el);
 		},
 
 		settings: function() {
