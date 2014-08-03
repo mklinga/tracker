@@ -7,3 +7,10 @@
       - nginx
     - name: Set nginx default site
       action: copy src=configs/nginx.default dest=/etc/nginx/sites-enabled/default
+      notify:
+      - restart nginx
+    - name: ensure nginx is running
+      service: name=nginx state=started
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
