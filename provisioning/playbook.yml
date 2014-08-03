@@ -1,0 +1,9 @@
+---
+- hosts: timetracker
+  tasks:
+    - name: Install packages
+      action: apt pkg={{ item }} state=installed update_cache=true
+      with_items: 
+      - nginx
+    - name: Set nginx default site
+      action: copy src=configs/nginx.default dest=/etc/nginx/sites-enabled/default
