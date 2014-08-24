@@ -1,4 +1,4 @@
-define([ 'jquery', 'underscore', 'backbone', 'controllers/history', 'views/projects' ],
+define([ 'jquery', 'underscore', 'backbone', 'controllers/history', 'views/project' ],
 
 function($, _, Backbone, HistoryListController, ProjectListView){
 
@@ -12,6 +12,7 @@ function($, _, Backbone, HistoryListController, ProjectListView){
 		},
 		dashboard: function() {
 			/* index */
+			console.log("dash");
 		},
 		project: function() {
 			var projectListView = new ProjectListView();
@@ -19,6 +20,7 @@ function($, _, Backbone, HistoryListController, ProjectListView){
 			$("main").append(projectListView.render().el);
 		},
 		history: function(projectId) {
+			console.log("history: " + projectId);
 			var historyListController = new HistoryListController(projectId);
 		},
 

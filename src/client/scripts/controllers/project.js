@@ -1,4 +1,4 @@
-define([ 'jquery', 'underscore', 'backbone', 'views/history', 'collections/history', 'models/history' ],
+define([ 'jquery', 'underscore', 'backbone', 'views/project', 'collections/project', 'models/project' ],
 		
 function($, _, Backbone, HistoryListView, HistoryCollection, HistoryModel) {
 
