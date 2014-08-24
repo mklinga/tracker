@@ -25,6 +25,16 @@ __p += '\n</ul>\n<a id="addNewTimeLink" href="#/history/' +
 return __p
 };
 
+this["JST"]["client/templates/project_new.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h1>New Project</h1>\nName: <input type="text" />\nDescription: <input type="text" />\n<button id="saveNewProject">Save</button>\n';
+
+}
+return __p
+};
+
 this["JST"]["client/templates/projects.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -38,7 +48,7 @@ __p += '\n\t\t<li>' +
 ((__t = ( item.name )) == null ? '' : __t) +
 '</li>\n\t';
  }) ;
-__p += '\n</ul>\n<a id="addNewProjectLink" href="#/projects/new" alt="Add New Project">Add new project</a>\n';
+__p += '\n</ul>\n<a id="addNewProjectLink" href="#" alt="Add New Project">Add new project</a>\n';
 
 }
 return __p

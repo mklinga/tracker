@@ -12,9 +12,42 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		}
 	});
 	
-	var ProjectListView = Backbone.View.extend({
-		tagName: 'ul',
+	/*
+	 * Form to add new items
+	 */
+
+	var NewProjectItemView = Backbone.View.extend({
+		tagName: 'div',
+		
+		className: 'project-list-item-new',
 	
+		template: JST["client/templates/project_new.html"],
+
+		events: {
+			"click #saveNewProject": "saveNewProject"
+		},
+
+		render: function() {
+			this.$el.html( this.template());
+			return this;
+		},
+
+		saveNewProject: function() {
+			this.$el.html("<span>Saved (not really)!</span>");
+		}
+	});
+	
+	/*
+	 * Main section for page
+	 */
+
+	var ProjectListView = Backbone.View.extend({
+		tagName: 'div',
+	
+		initialize: function() {
+			this.on('showNewForm', this.showNewForm, this);
+		},
+
 		template: JST["client/templates/projects.html"],
 
 		render: function() {
@@ -23,10 +56,16 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 
 			var that = this;
 			this.$('#addNewProjectLink').click(function(e) {
-				//that.trigger("showSaveForm");
+				that.trigger("showNewForm");
 			});
 
 			return this;
+		},
+
+		showNewForm: function() {
+			var newItem = new NewProjectItemView();
+			this.$el.append(newItem.$el);
+			newItem.render();
 		}
 	});
 
