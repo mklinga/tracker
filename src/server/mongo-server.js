@@ -61,9 +61,14 @@ function getAllProjects(req, res, next) {
 }
 
 function newProject(req, res, next) {
-   res.send(201, Math.random().toString(36).substr(3, 8));
-   next();
- }
+	db.createNewProject({
+		userId: req.params.userId,
+		projectId: req.params.projectId,
+		name: req.params.name,
+		description: req.params.description
+	});
+	next();
+}
 
 function getAllTimes(req, res, next) {
 
@@ -96,11 +101,13 @@ function getTime(req, res, next) {
 }
 
 var server = restify.createServer();
+server.use(restify.bodyParser());
+
 server.get("/api/times", getAllTimes);
 server.get("/api/times/:id", getTime);
 server.get("/api/projects", getAllProjects);
 
-server.post("/api/projects/new", newProject);
+server.post("/api/projects", newProject);
 
 server.listen(8080, function () {
 	console.log("%s listening at %s", server.name, server.url);

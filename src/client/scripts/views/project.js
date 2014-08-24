@@ -33,6 +33,8 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		},
 
 		saveNewProject: function() {
+			var newProject = new ProjectModel({userId: 12, projectId: 22, name: "Test", description: "set tes"});
+			newProject.save();
 			this.$el.html("<span>Saved (not really)!</span>");
 		}
 	});

@@ -60,6 +60,7 @@ mongoDB.once('open', function() {
 	History = mongoose.model('History', historySchema);
 	Project = mongoose.model('Project', projectSchema);
 
+	console.log("Mongoose is open!");
 });
 
 mongoDB.on('error', console.error.bind(console, "connection error"));
