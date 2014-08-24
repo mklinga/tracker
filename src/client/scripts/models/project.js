@@ -3,7 +3,7 @@ define([ 'underscore', 'backbone' ], function(_, Backbone){
 	var ProjectModel = Backbone.Model.extend({
 		defaults: {
 			userId: 0,
-			id: 0,
+			projectId: 0,
 			name: "My Project"
 		},
 		validate: function(attributes) {

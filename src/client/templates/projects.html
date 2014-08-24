@@ -1,1 +1,7 @@
-Project ${id}: <a href="#history/${id}"><strong>${name}</strong></a>
+<h1>Projects</h1>
+<ul id="projectlist">
+	<% _.each(items, function(item) { %>
+		<li><%= item.projectId %>. <%= item.name %></li>
+	<% }) %>
+</ul>
+<a id="addNewProjectLink" href="#/projects/new" alt="Add New Project">Add new project</a>

@@ -1,8 +1,8 @@
 define([ 'jquery', 'underscore', 'backbone', 'views/project', 'collections/project', 'models/project' ],
 		
-function($, _, Backbone, HistoryListView, HistoryCollection, HistoryModel) {
+function($, _, Backbone, ProjectListView, ProjectCollection, ProjectModel) {
 
-	var HistoryListController = function(projectId) {
+	var ProjectListController = function() {
 
 		/*
 		 * Get times for this project
@@ -10,27 +10,26 @@ function($, _, Backbone, HistoryListView, HistoryCollection, HistoryModel) {
 
 		var that = this;
 		
-		$.get("/tt/api/times/" + projectId, function( data ) {
+		$.get("/tt/api/projects", function( data ) {
 			/* TODO: validate recieved data */
 			var parsedData = JSON.parse(data);
-			that.collection = new HistoryCollection();
+			that.collection = new ProjectCollection();
 
 			for (var index in parsedData) {
-				var historyItem = new HistoryModel({
-					begin: parsedData[index].begin,
-					end: parsedData[index].end,
-					timerId: parsedData[index].timerId,
-					userId: parsedData[index].userId
+				var projectItem = new ProjectModel({
+					projectId: parsedData[index].projectId,
+					userId: parsedData[index].userId,
+					name: parsedData[index].name
 				});
 
-				that.collection.add(historyItem);
+				that.collection.add(projectItem);
 			}
 
-			var historyListView = new HistoryListView({id: projectId, collection: that.collection });
-			$("main").html(historyListView.render().el);
+			var projectListView = new ProjectListView({collection: that.collection });
+			$("main").html(projectListView.render().el);
 		});
 
 	};
 
-	return HistoryListController;
+	return ProjectListController;
 });

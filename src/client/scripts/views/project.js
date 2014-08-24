@@ -15,30 +15,15 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 	var ProjectListView = Backbone.View.extend({
 		tagName: 'ul',
 	
+		template: JST["client/templates/projects.html"],
+
 		render: function() {
 
+			this.$el.html( this.template({items: this.collection.toJSON()}));
+
 			var that = this;
-
-			$.get("/tt/api/projects", function( data ) {
-				/* TODO: validate recieved data */
-				var parsedData = JSON.parse(data);
-				that.collection = new ProjectCollection();
-
-				for (var index in parsedData) {
-					var projectItem = new ProjectModel({
-						userId: parsedData[index].userId,
-						id: parsedData[index].id,
-						name: parsedData[index].name
-					});
-
-					that.collection.add(projectItem);
-				}
-
-				that.collection.each(function(project) {
-					var projectView = new ProjectItemView({ model: project });
-					that.$el.append(projectView.render().el);
-				}, that);
-
+			this.$('#addNewProjectLink').click(function(e) {
+				//that.trigger("showSaveForm");
 			});
 
 			return this;
