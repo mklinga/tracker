@@ -15,7 +15,7 @@ function($, _, Backbone, HistoryListController, ProjectListView){
 			console.log("dash");
 		},
 		project: function() {
-			var projectListView = new ProjectListView();
+			var projectListView = new ProjectListView({attributes: {"userId":1}});
 		},
 		history: function(projectId) {
 			var historyListController = new HistoryListController(projectId);

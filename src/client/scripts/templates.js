@@ -29,7 +29,7 @@ this["JST"]["client/templates/project_new.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h1>New Project</h1>\nName: <input type="text" />\nDescription: <input type="text" />\n<button id="saveNewProject">Save</button>\n';
+__p += '<h1>New Project</h1>\nName: <input id="projectName" type="text" />\nDescription: <input id="projectDesc" type="text" />\n<button id="saveNewProject">Save</button>\n';
 
 }
 return __p
@@ -42,7 +42,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<h1>Projects</h1>\n<div id="projectlist">\n\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t<h2 class="project-name"><strong>' +
+__p += '\n\t<h2 class="project-name"><strong>' +
+((__t = ( item._id )) == null ? '' : __t) +
+' - ' +
 ((__t = ( item.name )) == null ? '' : __t) +
 '</strong></h2>\n\t\t<p class="project-desc">' +
 ((__t = ( item.description )) == null ? '' : __t) +

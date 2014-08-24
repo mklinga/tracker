@@ -1,7 +1,7 @@
 <h1>Projects</h1>
 <div id="projectlist">
 	<% _.each(items, function(item) { %>
-		<h2 class="project-name"><strong><%= item.name %></strong></h2>
+	<h2 class="project-name"><strong><%= item._id %> - <%= item.name %></strong></h2>
 		<p class="project-desc"><%= item.description %></p>
 	<% }) %>
 </div>

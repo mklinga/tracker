@@ -22,7 +22,9 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		},
 
 		saveNewProject: function() {
-			var newProject = new ProjectModel({userId: 12, projectId: 22, name: "Test", description: "set tes"});
+			// TODO: validation? in the model?
+			var newProject = new ProjectModel({userId: 1, name: $("#projectName").val(), description: $("#projectDesc").val()});
+			console.log(newProject);
 			newProject.save();
 			this.$el.html("<span>Saved (not really)!</span>");
 		}
@@ -38,7 +40,7 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 	
 		initialize: function() {
 			this.collection = new ProjectCollection();
-			this.collection.fetch({success: function(collection, response) { console.log(collection); }});
+			this.collection.fetch();
 			this.collection.on("sync", this.render, this);
 
 			this.on('showNewForm', this.showNewForm, this);

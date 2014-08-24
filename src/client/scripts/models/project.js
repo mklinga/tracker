@@ -5,8 +5,7 @@ define([ 'underscore', 'backbone' ], function(_, Backbone){
 		urlRoot: '/tt/api/projects',
 
 		defaults: {
-			userId: 0,
-			projectId: 0,
+			userId: 1,
 			name: "My Project",
 			description: "My Description"
 		},

@@ -21,7 +21,6 @@ var userSchema = mongoose.Schema({
 
 var projectSchema = mongoose.Schema({
 	userId: Number,
-	projectId: Number,
 	name: String,
 	description: String
 });
@@ -78,7 +77,7 @@ mongoDB.on('error', console.error.bind(console, "connection error"));
  */
 
 var getAllProjects = exports.getAllProjects = function(id, cb) {
-	Project.find({ "userId": 12 }, function(err, projects) {
+	Project.find({ "userId": id }, function(err, projects) {
 		if (err) return console.error(err);
 		cb(projects);
 	});
@@ -87,7 +86,6 @@ var getAllProjects = exports.getAllProjects = function(id, cb) {
 var createNewProject = exports.createNewProject = function(projectItem) {
 	var project = new Project({
 		userId: projectItem.userId,
-		projectId: projectItem.projectId,
 		name: projectItem.name,
 		description: projectItem.description
 	});
