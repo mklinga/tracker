@@ -19,7 +19,7 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 
 			var that = this;
 
-			$.get("https://localhost/tt/api/projects", function( data ) {
+			$.get("/tt/api/projects", function( data ) {
 				/* TODO: validate recieved data */
 				var parsedData = JSON.parse(data);
 				that.collection = new ProjectCollection();

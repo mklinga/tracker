@@ -10,7 +10,7 @@ function($, _, Backbone, HistoryListView, HistoryCollection, HistoryModel) {
 
 		var that = this;
 
-		$.get("https://localhost/tt/api/times/" + projectId, function( data ) {
+		$.get("/tt/api/times/" + projectId, function( data ) {
 			/* TODO: validate recieved data */
 			var parsedData = JSON.parse(data);
 			that.collection = new HistoryCollection();
