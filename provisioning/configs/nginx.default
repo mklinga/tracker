@@ -3,6 +3,7 @@ server {
 
 	root /timetracker/client;
 	index index.html index.htm;
+    sendfile off;
 
 	# Make site accessible from http://localhost/
 	server_name timetracker;
@@ -16,6 +17,7 @@ server {
 	}
 
     location /tt/ {
+		rewrite  ^/tt/(.*)  /$1 break;
 		proxy_pass http://localhost:8080;
 	}
 }

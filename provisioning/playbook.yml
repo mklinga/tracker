@@ -1,16 +1,31 @@
 ---
 - hosts: timetracker
   tasks:
+    - name: Add node repository
+      action: apt_repository repo='ppa:chris-lea/node.js'
     - name: Install packages
       action: apt pkg={{ item }} state=installed update_cache=true
       with_items: 
       - nginx
+      - nodejs
+      - mongodb
     - name: Set nginx default site
       action: copy src=configs/nginx.default dest=/etc/nginx/sites-enabled/default
       notify:
       - restart nginx
     - name: ensure nginx is running
       service: name=nginx state=started
+    - name: install project dependencys
+      npm: path=/timetracker
+    - name: "Install forever (to run Node.js app)."
+      npm: name=forever global=yes state=latest
+    - name: "Check list of Node.js apps running."
+      command: forever list
+      register: forever_list
+      changed_when: false
+    - name: "Start example Node.js app."
+      command: forever start /timetracker/server/mongo-server.js
+      when: "forever_list.stdout.find('/timetracker/server/mongo-server.js') == -1"
   handlers:
     - name: restart nginx
       service: name=nginx state=restarted
