@@ -21,9 +21,9 @@ var userSchema = mongoose.Schema({
 
 var projectSchema = mongoose.Schema({
 	userId: Number,
-	id: Number,
-	name: String
-	// description etc.
+	projectId: Number,
+	name: String,
+	description: String
 });
 
 var timeSchema = mongoose.Schema({
@@ -52,7 +52,6 @@ var mongoDB = mongoose.connection;
 mongoDB.once('open', function() {
 	/* Our connection to database is now opened! */
 	historySchema.methods.findAllFromSameUser = function (cb) {
-		console.log(this.userId);
 		return this.model('History').find({ userId: this.userId }, cb);
 	};
 
@@ -71,12 +70,38 @@ mongoDB.on('error', console.error.bind(console, "connection error"));
  *
  */
 
+/*
+ *
+ * Projects
+ *
+ */
+
 var getAllProjects = exports.getAllProjects = function(id, cb) {
 	Project.find({ "userId": id }, function(err, projects) {
 		if (err) return console.error(err);
 		cb(projects);
 	});
 };
+
+var createNewProject = exports.createNewProject = function(projectItem) {
+	var project = new Project({
+		userId: projectItem.userId,
+		projectId: projectItem.projectId,
+		name: projectItem.name,
+		description: projectItem.description
+	});
+
+	project.save(function(err, item) {
+		if (err) return console.error(err);
+		console.log("Saved new project!");
+	});
+}
+
+/*
+ *
+ * History
+ *
+ */
 
 var getAllHistory = exports.getAllHistory = function(userId, cb) {
 	History.find({ userId: userId }, function(err, histories) {
@@ -105,6 +130,5 @@ function addNewHistory(historyItem) {
 		if (err) return console.error(err);
 
 		console.log("Saved a new item to history: ");
-		console.log(history);
 	});
 }

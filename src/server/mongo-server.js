@@ -37,6 +37,12 @@ var times = {
 	}
 };
 
+/*
+ *
+ * Projects
+ *
+ */
+
 function getAllProjects(req, res, next) {
 
 	if (authenticatedUser()) {
@@ -53,6 +59,11 @@ function getAllProjects(req, res, next) {
 
 	}
 }
+
+function newProject(req, res, next) {
+   res.send(201, Math.random().toString(36).substr(3, 8));
+   next();
+ }
 
 function getAllTimes(req, res, next) {
 
@@ -88,7 +99,8 @@ var server = restify.createServer();
 server.get("/api/times", getAllTimes);
 server.get("/api/times/:id", getTime);
 server.get("/api/projects", getAllProjects);
-//server.head("/hello/:name", respond);
+
+server.post("/api/projects/new", newProject);
 
 server.listen(8080, function () {
 	console.log("%s listening at %s", server.name, server.url);
