@@ -1,6 +1,6 @@
-define([ 'jquery', 'underscore', 'backbone', 'controllers/history', 'controllers/project' ],
+define([ 'jquery', 'underscore', 'backbone', 'controllers/history', 'views/project' ],
 
-function($, _, Backbone, HistoryListController, ProjectListController){
+function($, _, Backbone, HistoryListController, ProjectListView){
 
 	/* Application Router */
 	var AppRouter = Backbone.Router.extend({
@@ -15,16 +15,11 @@ function($, _, Backbone, HistoryListController, ProjectListController){
 			console.log("dash");
 		},
 		project: function() {
-			var projectListController = new ProjectListController();
-			//var projectListView = new ProjectListView();
-			//$("main").empty().html("<h2>Projects</h2>");
-			//$("main").append(projectListView.render().el);
+			var projectListView = new ProjectListView();
 		},
 		history: function(projectId) {
-			console.log("history: " + projectId);
 			var historyListController = new HistoryListController(projectId);
 		},
-
 		settings: function() {
 			// $("main").html("Set things");
 		}

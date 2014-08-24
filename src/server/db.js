@@ -78,7 +78,7 @@ mongoDB.on('error', console.error.bind(console, "connection error"));
  */
 
 var getAllProjects = exports.getAllProjects = function(id, cb) {
-	Project.find({ "userId": id }, function(err, projects) {
+	Project.find({ "userId": 12 }, function(err, projects) {
 		if (err) return console.error(err);
 		cb(projects);
 	});

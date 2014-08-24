@@ -1,17 +1,6 @@
 define(['jquery', 'underscore', 'backbone', 'collections/project', 'models/project', 'templates'],
 function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 
-	var ProjectItemView = Backbone.View.extend({
-		tagName: 'li',
-	
-		template: JST["client/templates/projects.html"],
-
-		render: function() {
-			this.$el.html( this.template(this.model.toJSON()));
-			return this;
-		}
-	});
-	
 	/*
 	 * Form to add new items
 	 */
@@ -44,9 +33,14 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 	 */
 
 	var ProjectListView = Backbone.View.extend({
+		el: $("main"),
 		tagName: 'div',
 	
 		initialize: function() {
+			this.collection = new ProjectCollection();
+			this.collection.fetch({success: function(collection, response) { console.log(collection); }});
+			this.collection.on("sync", this.render, this);
+
 			this.on('showNewForm', this.showNewForm, this);
 		},
 
@@ -54,6 +48,7 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 
 		render: function() {
 
+			console.log(this.collection.toJSON());
 			this.$el.html( this.template({items: this.collection.toJSON()}));
 
 			var that = this;

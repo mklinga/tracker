@@ -40,15 +40,15 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h1>Projects</h1>\n<ul id="projectlist">\n\t';
+__p += '<h1>Projects</h1>\n<div id="projectlist">\n\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t<li>' +
-((__t = ( item.projectId )) == null ? '' : __t) +
-'. ' +
+__p += '\n\t\t<h2 class="project-name"><strong>' +
 ((__t = ( item.name )) == null ? '' : __t) +
-'</li>\n\t';
+'</strong></h2>\n\t\t<p class="project-desc">' +
+((__t = ( item.description )) == null ? '' : __t) +
+'</p>\n\t';
  }) ;
-__p += '\n</ul>\n<a id="addNewProjectLink" href="#" alt="Add New Project">Add new project</a>\n';
+__p += '\n</div>\n<a id="addNewProjectLink" href="#" alt="Add New Project">Add new project</a>\n';
 
 }
 return __p

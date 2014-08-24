@@ -47,13 +47,11 @@ function getAllProjects(req, res, next) {
 
 	if (authenticatedUser()) {
 		db.getAllProjects(authenticatedUser(), function(projects) {
-			//times[authenticatedUser].history = history;
 
 			res.header("Access-Control-Allow-Origin", "*");
 			res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
-			var allProjects = JSON.stringify(projects);
-			res.send(allProjects);
+			res.send(projects);
 			next();
 		});
 
