@@ -17,15 +17,6 @@
       service: name=nginx state=started
     - name: install project dependencys
       npm: path=/timetracker
-    - name: "Install forever (to run Node.js app)."
-      npm: name=forever global=yes state=latest
-    - name: "Check list of Node.js apps running."
-      command: forever list
-      register: forever_list
-      changed_when: false
-    - name: "Start example Node.js app."
-      command: forever start /timetracker/server/mongo-server.js
-      when: "forever_list.stdout.find('/timetracker/server/mongo-server.js') == -1"
   handlers:
     - name: restart nginx
       service: name=nginx state=restarted
