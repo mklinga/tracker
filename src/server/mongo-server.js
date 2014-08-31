@@ -44,32 +44,25 @@ var times = {
  */
 
 function getAllProjects(req, res, next) {
-
-	if (authenticatedUser()) {
-		db.getAllProjects(authenticatedUser(), function(projects) {
-
-			res.header("Access-Control-Allow-Origin", "*");
-			res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
-			res.send(projects);
-			next();
-		});
-
-	}
+	db.getAllProjects(authenticatedUser(), function(projects) {
+		res.send(projects);
+		next();
+	});
 }
 
 function newProject(req, res, next) {
-	db.createNewProject({
-		userId: req.params.userId,
-		projectId: req.params.projectId,
-		name: req.params.name,
-		description: req.params.description
-	});
-	next();
+	db.createNewProject(req.params);
+	res.send();
+	return next();
+}
+
+function updateProject(req, res, next) {
+	db.updateProject(req.params);
+	return next();
 }
 
 function removeProject(req, res, next) {
-	db.removeProject({ projectId: req.params.id });
+	db.removeProject(req.params.id);
 	res.send({}); // for some reason, backbone expects (empty) object as return
 	return next();
 }
@@ -109,10 +102,11 @@ server.use(restify.bodyParser());
 
 server.get("/api/times", getAllTimes);
 server.get("/api/times/:id", getTime);
-server.get("/api/projects", getAllProjects);
 
-server.post("/api/projects", newProject);
+server.get("/api/projects", getAllProjects);
 server.del("/api/projects/:id", removeProject);
+server.post("/api/projects", newProject);
+server.put("/api/projects/:id", updateProject);
 
 server.listen(8080, function () {
 	console.log("%s listening at %s", server.name, server.url);

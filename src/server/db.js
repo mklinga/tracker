@@ -96,11 +96,20 @@ var createNewProject = exports.createNewProject = function(projectItem) {
 	});
 }
 
-var removeProject = exports.removeProject = function(projectItem) {
+var removeProject = exports.removeProject = function(projectId) {
 	
-	Project.findByIdAndRemove({ _id: mongoose.Types.ObjectId(projectItem.projectId) }, function(err, obj) {
+	Project.findByIdAndRemove({ _id: mongoose.Types.ObjectId(projectId) }, function(err, obj) {
 		if (err) return console.error(err);
-		console.log("Removed project: " + projectItem.projectId);
+		console.log("Removed project: " + projectId);
+	});
+}
+
+var updateProject = exports.updateProject = function(projectItem) {
+	var project = new Project();
+
+	Project.findByIdAndUpdate(mongoose.Types.ObjectId(projectItem._id), { $set: { 'name': projectItem.name, 'description': projectItem.description }}, function(err, obj) {
+		if (err) console.log(err);
+		console.log("Updated project: " + projectId);
 	});
 }
 
