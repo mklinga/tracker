@@ -96,6 +96,14 @@ var createNewProject = exports.createNewProject = function(projectItem) {
 	});
 }
 
+var removeProject = exports.removeProject = function(projectItem) {
+	
+	Project.findByIdAndRemove({ _id: mongoose.Types.ObjectId(projectItem.projectId) }, function(err, obj) {
+		if (err) return console.error(err);
+		console.log("Removed project: " + projectItem.projectId);
+	});
+}
+
 /*
  *
  * History

@@ -68,6 +68,12 @@ function newProject(req, res, next) {
 	next();
 }
 
+function removeProject(req, res, next) {
+	db.removeProject({ projectId: req.params.id });
+	res.send({}); // for some reason, backbone expects (empty) object as return
+	return next();
+}
+
 function getAllTimes(req, res, next) {
 
 	if (authenticatedUser()) {
@@ -106,6 +112,7 @@ server.get("/api/times/:id", getTime);
 server.get("/api/projects", getAllProjects);
 
 server.post("/api/projects", newProject);
+server.del("/api/projects/:id", removeProject);
 
 server.listen(8080, function () {
 	console.log("%s listening at %s", server.name, server.url);
