@@ -35,25 +35,35 @@ __p += '<h1>New Project</h1>\nName: <input id="projectName" type="text" />\nDesc
 return __p
 };
 
-this["JST"]["client/templates/projects.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h1>Projects</h1>\n<div id="projectlist"></div>\n<a id="addNewProjectLink" href="#" alt="Add New Project">Add new project</a>\n';
-
-}
-return __p
-};
-
-this["JST"]["client/templates/single_project.html"] = function(obj) {
+this["JST"]["client/templates/project_single.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<h2 class="project-name"><strong>' +
 ((__t = ( item.name )) == null ? '' : __t) +
-'</strong></h2>\n<a class="removeProject" href="#">Remove this project</a>\n<p class="project-desc">' +
+'</strong></h2>\n<a class="removeProject" href="#">Remove this project</a>\n<a class="updateProject" href="#">Edit this project</a>\n<p class="project-desc">' +
 ((__t = ( item.description )) == null ? '' : __t) +
 '</p>\n';
+
+}
+return __p
+};
+
+this["JST"]["client/templates/project_update.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += 'Name: <input id="projectName" type="text" />\nDescription: <input id="projectDesc" type="text" />\n<button id="updateProject">Update</button>\n';
+
+}
+return __p
+};
+
+this["JST"]["client/templates/projects.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h1>Projects</h1>\n<div id="projectlist"></div>\n<a id="addNewProjectLink" href="#" alt="Add New Project">Add new project</a>\n';
 
 }
 return __p
