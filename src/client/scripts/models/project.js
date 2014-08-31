@@ -4,11 +4,14 @@ define([ 'underscore', 'backbone' ], function(_, Backbone){
 
 		urlRoot: '/tt/api/projects',
 
+		idAttribute: "_id",
+
 		defaults: {
 			userId: 1,
 			name: "My Project",
 			description: "My Description"
 		},
+
 		validate: function(attributes) {
 			// TODO
 		}
