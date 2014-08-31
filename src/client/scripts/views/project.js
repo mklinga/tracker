@@ -22,10 +22,31 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		},
 
 		saveNewProject: function() {
-			// TODO: validation? in the model?
 			var newProject = new ProjectModel({userId: 1, name: $("#projectName").val(), description: $("#projectDesc").val()});
 			newProject.save();
-			this.$el.html("<span>Saved (not really)!</span>");
+			this.collection.add(newProject);
+		}
+	});
+	/*
+	 * Form to edit items
+	 */
+
+	var UpdateProjectItemView = Backbone.View.extend({
+		tagName: 'div',
+		
+		template: JST["client/templates/project_update.html"],
+
+		events: {
+			"click #updateProject": "updateProject"
+		},
+
+		render: function() {
+			this.$el.html( this.template());
+			return this;
+		},
+
+		updateProject: function() {
+			this.model.save({name: $("#projectName").val(), description: $("#projectDesc").val()});
 		}
 	});
 	
@@ -40,7 +61,7 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		initialize: function() {
 			this.collection = new ProjectCollection();
 			this.collection.fetch();
-			this.collection.on("sync", this.render, this);
+			this.collection.on("sync add remove reset", this.render, this);
 
 			this.on('showNewForm', this.showNewForm, this);
 		},
@@ -67,7 +88,7 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		},
 
 		showNewForm: function() {
-			var newItem = new NewProjectItemView();
+			var newItem = new NewProjectItemView({ collection: this.collection});
 			this.$el.append(newItem.$el);
 			newItem.render();
 		}
@@ -81,10 +102,15 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		tagname: 'div',
 
 		events: {
-			'click .removeProject': 'removeProject'
+			'click .removeProject': 'removeProject',
+			'click .updateProject': 'updateProject',
 		},
 
-		template: JST['client/templates/single_project.html'],
+		initialize: function() {
+			this.on('change', this.render, this);
+		},
+
+		template: JST['client/templates/project_single.html'],
 
 		render: function() {
 			this.$el.html( this.template({ item: this.model.toJSON()}));
@@ -92,11 +118,13 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		},
 
 		removeProject: function() {
-			this.model.destroy({
-				success: function(model, response) {
-					console.log(response);
-				}
-			});
+			this.model.destroy();
+		},
+
+		updateProject: function() {
+			var editItem = new UpdateProjectItemView({ model: this.model});
+			this.$el.html(editItem.$el);
+			editItem.render();
 		}
 	})
 
