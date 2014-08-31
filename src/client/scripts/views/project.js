@@ -24,14 +24,13 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 		saveNewProject: function() {
 			// TODO: validation? in the model?
 			var newProject = new ProjectModel({userId: 1, name: $("#projectName").val(), description: $("#projectDesc").val()});
-			console.log(newProject);
 			newProject.save();
 			this.$el.html("<span>Saved (not really)!</span>");
 		}
 	});
 	
 	/*
-	 * Main section for page
+	 *  List of all the projects
 	 */
 
 	var ProjectListView = Backbone.View.extend({
@@ -50,10 +49,16 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 
 		render: function() {
 
-			console.log(this.collection.toJSON());
-			this.$el.html( this.template({items: this.collection.toJSON()}));
+			/* We render the main template first, then inject individual models to the list */
+			this.$el.html( this.template({}))
+
+			this.collection.each(function(project){
+				var projectView = new SingleProjectView({ model: project });
+				this.$('#projectlist').append(projectView.render().el);
+			}, this);
 
 			var that = this;
+
 			this.$('#addNewProjectLink').click(function(e) {
 				that.trigger("showNewForm");
 			});
@@ -67,6 +72,33 @@ function($, _, Backbone, ProjectCollection, ProjectModel, JST) {
 			newItem.render();
 		}
 	});
+
+	/*
+	 * View of an individual project
+	 */
+
+	var SingleProjectView = Backbone.View.extend({
+		tagname: 'div',
+
+		events: {
+			'click .removeProject': 'removeProject'
+		},
+
+		template: JST['client/templates/single_project.html'],
+
+		render: function() {
+			this.$el.html( this.template({ item: this.model.toJSON()}));
+			return this;
+		},
+
+		removeProject: function() {
+			this.model.destroy({
+				success: function(model, response) {
+					console.log(response);
+				}
+			});
+		}
+	})
 
 	return ProjectListView;
 });
